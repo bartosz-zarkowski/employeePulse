@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -20,13 +20,13 @@
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="card shadow border-0">
                     <div class="card-body p-4 p-sm-5">
-                        <form>
+                        <form th:action="@{/login}" th:object="${loginForm}" method="post">
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingInput" placeholder="e-mail">
+                                <input type="email" class="form-control" id="floatingInput" name="email" placeholder="e-mail">
                                 <label for="floatingInput">e-mail</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="hasło">
+                                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="hasło">
                                 <label for="floatingPassword">hasło</label>
                             </div>
                             <div class="d-grid">
