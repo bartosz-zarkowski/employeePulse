@@ -19,7 +19,7 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/",method = RequestMethod.GET)
     public String getLoginFrom() {
         return "auth/login";
     }
