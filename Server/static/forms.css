@@ -38,6 +38,7 @@ input[type=text] {
     text-align: center;
     color: #727272;
     font-family: 'Roboto', sans-serif;
+    width: 100%;
 }
 
 .form-floating>.form-control,
@@ -63,7 +64,8 @@ input[type=text] {
     border-color: #3E8DB5;
 }
 
-.register {
+.register,
+.login {
     padding-top: 10px;
     text-align: center;
     margin: auto;
