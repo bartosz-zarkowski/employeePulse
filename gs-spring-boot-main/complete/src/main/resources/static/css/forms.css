@@ -32,6 +32,7 @@ input[type=text] {
     background-color: #EEE;
     border-color: #EEE;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+    width: 100%;
 }
 
 .form-floating>label {
@@ -63,7 +64,8 @@ input[type=text] {
     border-color: #3E8DB5;
 }
 
-.register {
+.register,
+.login{
     padding-top: 10px;
     text-align: center;
     margin: auto;
