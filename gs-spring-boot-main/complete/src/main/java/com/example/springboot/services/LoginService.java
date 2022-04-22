@@ -4,6 +4,8 @@ import com.example.springboot.model.LoginForm;
 import com.example.springboot.model.RegisterForm;
 import com.example.springboot.model.User;
 import com.example.springboot.repository.LoginRepository;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -26,7 +28,12 @@ public class LoginService {
         User user = loginRepository.findByEmail(email);
 
         if (user != null){
-            if (user.getEmail().equals(email) && user.getPassword().equals(password)){
+            Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 32, 64);
+
+            boolean validPassword = argon2.verify(user.getPassword(), password.toCharArray());
+            boolean validEmail = user.getEmail().equals(email);
+
+            if (validEmail && validPassword){
                 model.addAttribute("message", "You logged in successfully");
                 model.addAttribute("email", email);
                 return "home";
@@ -46,9 +53,11 @@ public class LoginService {
         String password2 = registerForm.getPassword2();
 
         if (password.equals(password2)){
+            Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 32, 64);
             model.addAttribute("message", "You registered succesfully");
             model.addAttribute("email", email);
-            User newUser = new User(email, firstName, lastName, password);
+            String hash = argon2.hash(2,15*1024,1, password.toCharArray());
+            User newUser = new User(email, firstName, lastName, hash);
             loginRepository.save(newUser);
             return "home";
         } else {
