@@ -6,6 +6,7 @@ import com.example.springboot.model.User;
 import com.example.springboot.repository.LoginRepository;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -52,7 +53,12 @@ public class LoginService {
         String password = registerForm.getPassword();
         String password2 = registerForm.getPassword2();
 
-        if (password.equals(password2)){
+        boolean validPassword = password.equals(password2) && password.length() > 7;
+        boolean validEmail = EmailValidator.getInstance().isValid(email);
+        boolean validName = firstName.matches("(?i)(^[a-z])((?![ .,'-]$)[a-z .,'-]){0,24}$")
+                && lastName.matches("(?i)(^[a-z])((?![ .,'-]$)[a-z .,'-]){0,24}$");
+
+        if (validEmail && validName && validPassword){
             Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 32, 64);
             model.addAttribute("message", "You registered succesfully");
             model.addAttribute("email", email);
