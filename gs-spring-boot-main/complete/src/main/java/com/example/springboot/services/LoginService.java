@@ -9,6 +9,10 @@ import de.mkammerer.argon2.Argon2Factory;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Map;
 
 @Service
 public class LoginService {
@@ -19,12 +23,10 @@ public class LoginService {
         this.loginRepository = loginRepository;
     }
 
-    public String login(LoginForm loginForm, Model model) {
+    public String login(LoginForm loginForm, RedirectAttributes redirectAttrs) {
 
         String email = loginForm.getEmail();
         String password = loginForm.getPassword();
-
-        // tutaj potrzebna bardziej zaawansowana autoryzacja
 
         User user = loginRepository.findByEmail(email);
 
@@ -35,12 +37,12 @@ public class LoginService {
             boolean validEmail = user.getEmail().equals(email);
 
             if (validEmail && validPassword){
-                model.addAttribute("message", "You logged in successfully");
-                model.addAttribute("email", email);
-                return "home";
+                redirectAttrs.addAttribute("email", email);
+                redirectAttrs.addFlashAttribute("key", "key");
+                return "redirect:/generate?email={email}";
             }
         } else {
-            model.addAttribute("message", "Invalid credidentials");
+            redirectAttrs.addAttribute("message", "Invalid credidentials");
         }
         return "auth/login";
     }
@@ -65,7 +67,7 @@ public class LoginService {
             String hash = argon2.hash(2,15*1024,1, password.toCharArray());
             User newUser = new User(email, firstName, lastName, hash);
             loginRepository.save(newUser);
-            return "home";
+            return "auth/login";
         } else {
             model.addAttribute("invalidCredentials", true);
             return "auth/register";

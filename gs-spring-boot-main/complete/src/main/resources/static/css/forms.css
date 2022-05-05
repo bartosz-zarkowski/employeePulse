@@ -32,13 +32,13 @@ input[type=text] {
     background-color: #EEE;
     border-color: #EEE;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
-    width: 100%;
 }
 
 .form-floating>label {
     text-align: center;
     color: #727272;
     font-family: 'Roboto', sans-serif;
+    width: 100%;
 }
 
 .form-floating>.form-control,
@@ -65,7 +65,7 @@ input[type=text] {
 }
 
 .register,
-.login{
+.login {
     padding-top: 10px;
     text-align: center;
     margin: auto;

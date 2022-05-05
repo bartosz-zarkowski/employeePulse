@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class LoginController {
@@ -25,14 +27,15 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute (name="loginForm")LoginForm loginForm, Model model){
-        return loginService.login(loginForm, model);
+    public String login(@ModelAttribute (name="loginForm")LoginForm loginForm, RedirectAttributes redirectAttrs){
+        return loginService.login(loginForm, redirectAttrs);
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String getRegisterForm(){
         return "auth/register";
     }
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@ModelAttribute (name="registerForm")RegisterForm registerForm, Model model){
         return loginService.register(registerForm, model);
