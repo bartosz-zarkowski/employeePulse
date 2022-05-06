@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="answers row row-cols-1 row-cols-md-2">
-
+                <a th:href="@{|vote?id=${id}&option=3|}" class="answer-btn">
                 <div class="col mb-4 d-flex align-items-stretch">
 
                     <div class="card answer">
@@ -39,7 +39,8 @@
                         </button>
                     </div>
                 </div>
-
+                </a>
+                <a th:href="@{|vote?id=${id}&option=2|}" class="answer-btn">
                 <div class="col mb-4 d-flex align-items-stretch">
                     <div class="card answer">
                         <button class="answer-btn" th:action="@{/vote?id=${id}?option=2}">
@@ -52,21 +53,22 @@
                         </button>
                     </div>
                 </div>
-
+                </a>
+                <a th:href="@{|vote?id=${id}&option=3|}" class="answer-btn">
                 <div class="col mb-4 d-flex align-items-stretch">
                     <div class="card answer">
-                        <button class="answer-btn" th:action="@{/vote?id=${id}?option=3}">
+                        <button class="answer-btn">
                             <!-- Tutaj pobrać obraz z bazy danych (mechanika do omówienia)-->
                             <img src="css/IMAGES/smile.png" class="card-img-top survey-image" alt="">
-                            <div class="card-body">
-                                <!-- Tutaj pobrać odpowiedź z bazy -->
-                                <p class="card-text" th:text="${answer3}"></p>
-                            </div>
+                                <div class="card-body">
+                                    <!-- Tutaj pobrać odpowiedź z bazy -->
+                                    <p class="card-text" th:text="${answer3}"></p>
+                                </div>
                         </button>
                     </div>
-
                 </div>
-                </button>
+                </a>
+                <a th:href="@{|vote?id=${id}&option=4|}" class="answer-btn">
                 <div class="col mb-4 d-flex align-items-stretch">
                     <div class="card answer">
                         <button class="answer-btn" th:href="@{/vote?id=${id}?option=4}">
@@ -79,9 +81,10 @@
                         </button>
                     </div>
                 </div>
+                </a>
             </div>
-
         </div>
+
     </div>
 </body>
 
