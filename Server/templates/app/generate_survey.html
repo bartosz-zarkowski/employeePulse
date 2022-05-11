@@ -16,12 +16,12 @@
 
 <body>
     <nav class="navbar topbar">
-        <div class="row">
+        <div class="row row-topbar">
             <div class="col-sm-3 redirect">
                 <a href="display_surveys.html"><button class="btn btn-primary btn-login" type="submit">RAPORTY</button></a>
             </div>
             <div class="col-sm-6 title">
-                <h1>Generowanie ankiety</h1>
+                <h1>GENEROWANIE ANKIETY</h1>
             </div>
             <div class="col-sm-3 user">
                 <i class="user-name">Imię Nazwisko</i>
@@ -33,49 +33,49 @@
     </nav>
 
     <div class="container">
-        <div class="row">
-            <div class="col-sm-9 col-md-9 col-lg-9 mx-auto content">
+        <div class="row row-gen">
+            <div class="col-sm-12 col-md-12 col-lg-12 mx-auto content">
                 <form action="survey_link.html">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingText" placeholder="Tytuł ankiety" required="required">
-                        <label for="floatingText">Tytuł ankiety</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingText" placeholder="Pytanie" required="required">
-                        <label for="floatingText">Pytanie</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingText" placeholder="Odpowiedź 1" required="required">
-                        <label for="floatingText">Odpowiedź 1</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingText" placeholder="Odpowiedź 2" required="required">
-                        <label for="floatingText">Odpowiedź 2</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingText" placeholder="Odpowiedź 3" required="required">
-                        <label for="floatingText">Odpowiedź 3</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingText" placeholder="Odpowiedź 4" required="required">
-                        <label for="floatingText">Odpowiedź 4</label>
-                    </div>
-                    <div class="row dates mb-3">
-                        <div class="col-6">
+                    <div class="row row-form">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingText" placeholder="Tytuł ankiety" required="required">
+                            <label for="floatingText">Tytuł ankiety</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingText" placeholder="Pytanie" required="required">
+                            <label for="floatingText">Pytanie</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingText" placeholder="Odpowiedź 1" required="required">
+                            <label for="floatingText">Odpowiedź 1</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingText" placeholder="Odpowiedź 2" required="required">
+                            <label for="floatingText">Odpowiedź 2</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingText" placeholder="Odpowiedź 3" required="required">
+                            <label for="floatingText">Odpowiedź 3</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingText" placeholder="Odpowiedź 4" required="required">
+                            <label for="floatingText">Odpowiedź 4</label>
+                        </div>
+                        <div class="start-date col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <div class="form-floating">
-                                <input type="datetime-local" class="form-control form-control-left" id="floatingText" placeholder="Start" required="required">
+                                <input type="datetime-local" class="form-control form-control-start form-control-start-gen" id="floatingText" placeholder="Start" required="required">
                                 <label for="floatingText">Start</label>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="end-date col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <div class="form-floating">
-                                <input type="datetime-local" class="form-control form-control-right" id="floatingText" placeholder="Koniec" required="required">
+                                <input type="datetime-local" class="form-control form-control-end form-control-end-gen" id="floatingText" placeholder="Koniec" required="required">
                                 <label for="floatingText">Koniec</label>
                             </div>
                         </div>
-                    </div>
-                    <div class="d-grid">
-                        <button class="btn btn-primary btn-login" type="submit">generuj ankietę</button>
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-login" type="submit">generuj ankietę</button>
+                        </div>
                     </div>
                 </form>
             </div>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Employee pulse - raporty</title>
+    <!-- <meta http-equiv="refresh" content="3"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <!-- <link rel="icon" type="image/x-icon" href="../../static/IMAGES/favicon.png" /> -->
+
+</head>
+
+<body>
+    <nav class="navbar topbar">
+        <div class="row row-topbar">
+            <div class="col-sm-3 redirect">
+                <a href="generate_survey.html"><button class="btn btn-primary btn-login" type="submit">GENEROWANIE</button></a>
+            </div>
+            <div class="col-sm-6 title">
+                <h1>RAPORTY</h1>
+            </div>
+            <div class="col-sm-3 user">
+                <i class="user-name">Imię Nazwisko</i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16">
+                    <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+                  </svg>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="col-sm-9 col-md-9 col-lg-9 mx-auto content">
+            <div class="row row-filter">
+                <div class="col=xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-5">
+                    <div class="form-floating form-floating-title">
+                        <input type="text" class="form-control form-control-title" id="floatingText" placeholder="Tytuł ankiety">
+                        <label for="floatingText">Tytuł ankiety</label>
+                    </div>
+                </div>
+                <div class="col=xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                    <div class="form-floating">
+                        <input type="date" class="form-control form-control-start" id="floatingText" placeholder="Start">
+                        <label for="floatingText">Start</label>
+                    </div>
+                </div>
+                <div class="col=xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                    <div class="form-floating">
+                        <input type="date" class="form-control form-control-end" id="floatingText" placeholder="Koniec">
+                        <label for="floatingText">Koniec</label>
+                    </div>
+                </div>
+                <div class="col=xs-12 col-sm-12 col-md-4 col-lg-2 col-xl-3">
+                    <div class="d-grid">
+                        <button class="btn btn-primary btn-login" type="submit">filtruj</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-raports">
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="accordion-item expandable-card mb-3">
+                        <h2 class="accordion-header expandable-card-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button expandable-card-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                            <!-- Tutaj pobrać tytuł ankiety z bazy danych -->
+                            <div class="row survey-header">
+                            <div class="col-11 survey-title">Nastroje wśród pracowników</div>
+                            <!-- Tutaj pobrać datę rozpoczęcia ankiety z bazy danych -->
+                            <div class="col-1 survey-date">09.05.2022r.</div>
+                            </div>
+                        </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse expandable-card-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body expandable-card-body">
+                                <div class="row survey-raport">
+                                    <div class="col-12 survey-question">
+                                        Jak się dziś czujesz?
+                                    </div>
+                                    <div class="col-8 answers">Odpowiedź</div>
+                                    <div class="col-4 answers-number">Ilość odpowiedzi</div>
+
+                                    <!-- Tutaj pobrać odpowiedź pierwszą z bazy -->
+                                    <div class="col-8 answer">Dobrze</div>
+                                    <!-- Tutaj pobrać ilość wystąpień pierwszej odpowiedzi z bazy -->
+                                    <div class="col-4 answers-number">12</div>
+
+                                    <!-- Tutaj pobrać odpowiedź drugą z bazy -->
+                                    <div class="col-8 answer">Źle</div>
+                                    <!-- Tutaj pobrać ilość wystąpień drugiej odpowiedzi z bazy -->
+                                    <div class="col-4 answers-number">3</div>
+
+                                    <!-- Tutaj pobrać odpowiedź trzecią z bazy -->
+                                    <div class="col-8 answer">Umiarkowanie</div>
+                                    <!-- Tutaj pobrać ilość wystąpień trzeciej odpowiedzi z bazy -->
+                                    <div class="col-4 answers-number">5</div>
+
+                                    <!-- Tutaj pobrać odpowiedź czwartą z bazy -->
+                                    <div class="col-8 answer">Bez zmian</div>
+                                    <!-- Tutaj pobrać ilość wystąpień czwartej odpowiedzi z bazy -->
+                                    <div class="col-4 answers-number">3</div>
+
+                                    <div class="col-8 answer last-answer">Suma odpowiedzi</div>
+                                    <!-- Tutaj pobrać sumę wszystkich odpowiedzi -->
+                                    <div class="col-4 answers-number last-answer">23</div>
+
+                                    <!-- Tutaj pobrać link do ankiety tylko gdy jest ona aktywna -->
+                                    <div class="survey-link" id="survey-link">
+                                        <div class="col-sm-8 col-md-8 col-lg-8 mx-auto copy">
+                                            <input type="text" class="form-control link-field link-field-survey" readonly="readonly" id="floating-text" type="text" value="https://www.youtube.com/watch?v=zrON6VI5kCQ" style="box-shadow: none;color: #727272;font-size: 18px;">
+                                        </div>
+                                        <div class="col-sm-3 col-md-3 col-lg-3 mx-auto copy">
+                                            <button class="btn btn-primary btn-copy btn-copy-survey" onclick="copyLink()">Kopiuj</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyLink() {
+            /* Get the text field */
+            var copyText = document.getElementById("floating-text");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+            /* Copy the text inside the text field */
+            navigator.clipboard.writeText(copyText.value);
+
+            /* Alert the copied text */
+            alert("Copied the text: " + copyText.value);
+        }
+    </script>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js " integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p " crossorigin="anonymous "></script>
+</body>
+
+</html>

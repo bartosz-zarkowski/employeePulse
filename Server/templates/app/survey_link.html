@@ -11,6 +11,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <!-- <link rel="icon" type="image/x-icon" href="../../static/IMAGES/favicon.png" /> -->
+</head>
+
+<body>
+    <nav class="navbar topbar">
+        <div class="row row-topbar">
+            <div class="col-sm-3 redirect">
+                <a href="display_surveys.html"><button class="btn btn-primary btn-login" type="submit">RAPORTY</button></a>
+            </div>
+            <div class="col-sm-6 title">
+                <h1>GENEROWANIE ANKIETY</h1>
+            </div>
+            <div class="col-sm-3 user">
+                <i class="user-name">Imię Nazwisko</i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16">
+                    <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+                  </svg>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container survey-container">
+        <div class="row">
+            <div class="col-sm-9 col-md-9 col-lg-9 mx-auto copy">
+                <input type="text" class="form-control link-field" id="floating-text" type="text" value="https://www.youtube.com/watch?v=zrON6VI5kCQ">
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3 mx-auto copy">
+                <button class="btn btn-primary btn-copy" onclick="copyLink()">Kopiuj</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         function copyLink() {
@@ -29,36 +59,6 @@
         }
     </script>
 
-</head>
-
-<body>
-    <nav class="navbar topbar">
-        <div class="row">
-            <div class="col-sm-3 redirect">
-                <a href="display_surveys.html"><button class="btn btn-primary btn-login" type="submit">RAPORTY</button></a>
-            </div>
-            <div class="col-sm-6 title">
-                <h1>Generowanie ankiety</h1>
-            </div>
-            <div class="col-sm-3 user">
-                <i class="user-name">Imię Nazwisko</i>
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16">
-                    <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
-                  </svg>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-9 col-md-9 col-lg-9 mx-auto copy">
-                <input type="text" class="form-control link-field" id="floating-text" type="text" value="https://www.youtube.com/watch?v=zrON6VI5kCQ">
-            </div>
-            <div class="col-sm-3 col-md-3 col-lg-3 mx-auto copy">
-                <button class="btn btn-primary btn-copy" onclick="copyLink()">Kopiuj</button>
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>
