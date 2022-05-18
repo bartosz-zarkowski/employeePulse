@@ -22,6 +22,6 @@ steps:
     goals: 'package'
 - script: |
     echo $(system.defaultWorkingDirectory)
-    mvn gs-spring-boot-main/complete/pom.xml
+    cd gs-spring-boot-main/complete
     mvn package
   displayName: 'Build with Maven'
