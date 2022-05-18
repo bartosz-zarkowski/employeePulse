@@ -10,11 +10,9 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 - task: Maven@3
   inputs:
-    mavenPomFile: 'gs-spring-boot-main/complete/pom.xml'
+    mavenPomFile: '$(system.defaultWorkingDirectory)/gs-spring-boot-main/complete/pom.xml'
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
@@ -26,7 +24,3 @@ steps:
     echo Starting the build
     mvn package
   displayName: 'Build with Maven'
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
