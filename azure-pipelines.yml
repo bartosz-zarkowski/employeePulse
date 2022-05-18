@@ -6,22 +6,63 @@
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
+variables:
 
-steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'gs-spring-boot-main/complete/pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: false
-    testResultsFiles: '**/TEST-*.xml'
-    goals: 'package'
-- script: |
-    echo $(system.defaultWorkingDirectory)
-    cd gs-spring-boot-main/complete
-    mvn package
-  displayName: 'Build with Maven'
+  # Azure Resource Manager connection created during pipeline creation
+  azureSubscription: '2d5a0f6e-46b5-4ef4-8152-c1d177dd1c4b'
+
+  # Web app name
+  webAppName: 'employee-pulse'
+
+  # Environment name
+  environmentName: 'employee-pulse'
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:
+  - job: MavenPackageAndPublishArtifacts
+    displayName: Maven Package and Publish Artifacts
+    pool:
+      vmImage: $(vmImageName)
+
+    steps:
+    - task: Maven@3
+      displayName: 'Maven Package'
+      inputs:
+        mavenPomFile: 'pom.xml'
+
+    - task: CopyFiles@2
+      displayName: 'Copy Files to artifact staging directory'
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: '**/target/*.?(war|jar)'
+        TargetFolder: $(Build.ArtifactStagingDirectory)
+
+    - upload: $(Build.ArtifactStagingDirectory)
+      artifact: drop
+
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - deployment: DeployLinuxWebApp
+    displayName: Deploy Linux Web App
+    environment: $(environmentName)
+    pool:
+      vmImage: $(vmImageName)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureWebApp@1
+            displayName: 'Azure Web App Deploy: employee-pulse'
+            inputs:
+              azureSubscription: $(azureSubscription)
+              appType: webAppLinux
+              appName: $(webAppName)
+              package: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
