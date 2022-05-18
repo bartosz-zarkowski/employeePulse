@@ -1,2 +1,0 @@
-# gs-spring-boot-main
-
