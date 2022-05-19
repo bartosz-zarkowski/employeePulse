@@ -31,7 +31,7 @@ public class LoginService {
         User user = loginRepository.findByEmail(email);
 
         if (user != null){
-            Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 32, 64);
+            Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 8, 16);
 
             boolean validPassword = argon2.verify(user.getPassword(), password.toCharArray());
             boolean validEmail = user.getEmail().equals(email);
@@ -67,7 +67,7 @@ public class LoginService {
         }
 
         if (validEmail && validName && validPassword){
-            Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 32, 64);
+            Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 8, 16);
             model.addAttribute("message", "You registered succesfully");
             model.addAttribute("email", email);
             String hash = argon2.hash(2,15*1024,1, password.toCharArray());
