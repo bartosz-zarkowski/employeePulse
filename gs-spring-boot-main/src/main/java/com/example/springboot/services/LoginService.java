@@ -60,12 +60,18 @@ public class LoginService {
         boolean validName = firstName.matches("(?i)(^[a-z])((?![ .,'-]$)[a-z .,'-]){0,24}$")
                 && lastName.matches("(?i)(^[a-z])((?![ .,'-]$)[a-z .,'-]){0,24}$");
 
+        User available = loginRepository.findByEmail(email);
+
+        if (available != null){
+            return "auth/register";
+        }
+
         if (validEmail && validName && validPassword){
             Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 32, 64);
             model.addAttribute("message", "You registered succesfully");
             model.addAttribute("email", email);
-            // String hash = argon2.hash(2,15*1024,1, password.toCharArray());
-            User newUser = new User(email, firstName, lastName, password);
+            String hash = argon2.hash(2,15*1024,1, password.toCharArray());
+            User newUser = new User(email, firstName, lastName, hash);
             loginRepository.save(newUser);
             return "auth/login";
         } else {
