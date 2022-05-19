@@ -1,9 +1,6 @@
 package com.example.springboot.controllers;
 
-import com.example.springboot.model.LoginForm;
-import com.example.springboot.model.RegisterForm;
-import com.example.springboot.model.SurveyForm;
-import com.example.springboot.model.UserData;
+import com.example.springboot.model.*;
 import com.example.springboot.services.LoginService;
 import com.example.springboot.services.SurveyService;
 import org.springframework.stereotype.Controller;
@@ -47,8 +44,18 @@ public class SurveyController {
     }
 
     @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public String display(){
-        return surveyService.display();
+    public String display(@ModelAttribute (name="filterForm") FilterForm filterForm, @RequestParam String email, Model model){
+        return surveyService.display(filterForm, email, model);
+    }
+
+    @RequestMapping(value = "/display", method = RequestMethod.POST)
+    public String display1(@ModelAttribute (name="filterForm") FilterForm filterForm, @RequestParam String email, Model model){
+        return surveyService.display(filterForm, email, model);
+    }
+
+    @RequestMapping(value = "/filter", method = RequestMethod.POST)
+    public String filter(@ModelAttribute (name="filterForm") FilterForm filterForm, @RequestParam(required = false) String email, RedirectAttributes redirectAttributes){
+        return surveyService.filter(filterForm, email, redirectAttributes);
     }
 
 }

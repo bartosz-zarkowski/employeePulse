@@ -1,5 +1,6 @@
 package com.example.springboot.services;
 
+import com.example.springboot.model.FilterForm;
 import com.example.springboot.model.Survey;
 import com.example.springboot.model.SurveyForm;
 import com.example.springboot.model.User;
@@ -10,11 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.tags.EditorAwareTag;
 
-import java.time.LocalDateTime;
-import java.time.Period;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class SurveyService {
@@ -29,7 +29,7 @@ public class SurveyService {
 
     public String getPage(String email, Model model) {
 
-        if (model.getAttribute("key") == "key"){
+        if ("key" == "key"){
             User user = loginRepository.findByEmail(email);
 
             String firstName = user.getFirstName();
@@ -82,6 +82,7 @@ public class SurveyService {
         surveyRepository.save(changeLink);
 
         model.addAttribute("link", survey.getLink());
+        model.addAttribute("email", email);
         return "app/survey_link";
     }
 
@@ -153,7 +154,91 @@ public class SurveyService {
         return "auth/login";
     }
 
-    public String display() {
+    public String dateToLocalDate(String date){
+        date = date.substring(0, 10);
+        return date;
+    }
+
+    public String display(FilterForm filterForm, String email, Model model) {
+
+
+        User user = loginRepository.findByEmail(email);
+
+        if(user != null){
+            String name = user.getFirstName() + " " + user.getLastName();
+            List<Survey> surveyList = surveyRepository.findByUserId(user.getId());
+
+            if (filterForm.getTitle() != null & filterForm.getStartedAt() != null & filterForm.getStoppedAt() != null){
+
+                if (!Objects.equals(filterForm.getTitle(), "") & !Objects.equals(filterForm.getStartedAt(), "") & !Objects.equals(filterForm.getStoppedAt(), "")){
+                    // wszystko
+                surveyList.removeIf(survey -> !survey.getTitle().toLowerCase().contains(filterForm.getTitle().toLowerCase()));
+
+                LocalDate filterStart = LocalDate.parse(filterForm.getStartedAt());
+                LocalDate filterStop = LocalDate.parse(filterForm.getStoppedAt());
+
+                surveyList.removeIf(survey -> LocalDate.parse(dateToLocalDate(survey.getStartedAt())).isBefore(filterStart));
+                surveyList.removeIf(survey -> LocalDate.parse(dateToLocalDate(survey.getExpiredAt())).isAfter(filterStop));
+                    System.out.println(filterForm.getTitle());
+                    System.out.println(filterForm.getStartedAt());
+                    System.out.println(filterForm.getStoppedAt());
+                } else if (Objects.equals(filterForm.getTitle(), "") & !Objects.equals(filterForm.getStartedAt(), "") & !Objects.equals(filterForm.getStoppedAt(), "")){
+                    // daty
+
+                    LocalDate filterStart = LocalDate.parse(filterForm.getStartedAt());
+                    LocalDate filterStop = LocalDate.parse(filterForm.getStoppedAt());
+
+                    surveyList.removeIf(survey -> LocalDate.parse(dateToLocalDate(survey.getStartedAt())).isBefore(filterStart));
+                    surveyList.removeIf(survey -> LocalDate.parse(dateToLocalDate(survey.getExpiredAt())).isAfter(filterStop));
+
+                } else if (Objects.equals(filterForm.getTitle(), "") & !Objects.equals(filterForm.getStartedAt(), "") & Objects.equals(filterForm.getStoppedAt(), "")){
+                    // start
+                    LocalDate filterStart = LocalDate.parse(filterForm.getStartedAt());
+                    surveyList.removeIf(survey -> LocalDate.parse(dateToLocalDate(survey.getStartedAt())).isBefore(filterStart));
+                } else if (Objects.equals(filterForm.getTitle(), "") & Objects.equals(filterForm.getStartedAt(), "") & !Objects.equals(filterForm.getStoppedAt(), "")){
+                    // stop
+                    LocalDate filterStop = LocalDate.parse(filterForm.getStoppedAt());
+                    surveyList.removeIf(survey -> LocalDate.parse(dateToLocalDate(survey.getExpiredAt())).isAfter(filterStop));
+                } else if (!Objects.equals(filterForm.getTitle(), "") & !Objects.equals(filterForm.getStartedAt(), "") & Objects.equals(filterForm.getStoppedAt(), "")){
+                    // tytuł i start
+                    surveyList.removeIf(survey -> !survey.getTitle().toLowerCase().contains(filterForm.getTitle().toLowerCase()));
+                    LocalDate filterStart = LocalDate.parse(filterForm.getStartedAt());
+                    surveyList.removeIf(survey -> LocalDate.parse(dateToLocalDate(survey.getStartedAt())).isBefore(filterStart));
+                } else if (!Objects.equals(filterForm.getTitle(), "") & Objects.equals(filterForm.getStartedAt(), "") & !Objects.equals(filterForm.getStoppedAt(), "")){
+                    // tytuł i stop
+                    surveyList.removeIf(survey -> !survey.getTitle().toLowerCase().contains(filterForm.getTitle().toLowerCase()));
+                    LocalDate filterStop = LocalDate.parse(filterForm.getStoppedAt());
+                    surveyList.removeIf(survey -> LocalDate.parse(dateToLocalDate(survey.getExpiredAt())).isAfter(filterStop));
+                } else if (!Objects.equals(filterForm.getTitle(), "") & Objects.equals(filterForm.getStartedAt(), "") & Objects.equals(filterForm.getStoppedAt(), "")){
+                    surveyList.removeIf(survey -> !survey.getTitle().toLowerCase().contains(filterForm.getTitle().toLowerCase()));
+                }
+            } else {
+                System.out.println("XDDDDDDD");
+            }
+
+
+            for (Survey survey : surveyList){
+                String date = survey.getStartedAt();
+                String year = date.substring(0, 4);
+                String month = date.substring(5, 7);
+                String day = date.substring(8, 10);
+                survey.setStartedAt(day + "." + month + "." + year + "r");
+            }
+            System.out.println("xD " + email);
+            Collections.reverse(surveyList);
+            model.addAttribute("email", email);
+            model.addAttribute("surveyList", surveyList);
+            model.addAttribute("name", name);
+            // model.addFlashAttribute("key", "key");
+        }
+
         return "app/display_surveys";
+    }
+
+    public String filter(FilterForm filterForm, String email, RedirectAttributes redirectAttributes) {
+        System.out.println(filterForm.getTitle());
+        System.out.println(filterForm.getStartedAt());
+        System.out.println(filterForm.getStoppedAt());
+        return "redirect:/display?email={email}";
     }
 }
