@@ -66,7 +66,7 @@ public class LoginService {
             model.addAttribute("email", email);
             String hash = argon2.hash(2,15*1024,1, password.toCharArray());
             User newUser = new User(email, firstName, lastName, hash);
-            loginRepository.save(newUser);
+            // loginRepository.save(newUser);
             return "auth/login";
         } else {
             model.addAttribute("invalidCredentials", true);
