@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class LoginService {
@@ -31,9 +32,10 @@ public class LoginService {
         User user = loginRepository.findByEmail(email);
 
         if (user != null){
-            Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 8, 16);
+            // Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 8, 16);
 
-            boolean validPassword = argon2.verify(user.getPassword(), password.toCharArray());
+            // boolean validPassword = argon2.verify(user.getPassword(), password.toCharArray());
+            boolean validPassword = Objects.equals(user.getPassword(), password);
             boolean validEmail = user.getEmail().equals(email);
 
             if (validEmail && validPassword){
@@ -67,11 +69,11 @@ public class LoginService {
         }
 
         if (validEmail && validName && validPassword){
-            Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 8, 16);
+            // Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 8, 16);
             model.addAttribute("message", "You registered succesfully");
             model.addAttribute("email", email);
-            String hash = argon2.hash(2,15*1024,1, password.toCharArray());
-            User newUser = new User(email, firstName, lastName, hash);
+            // String hash = argon2.hash(2,15*1024,1, password.toCharArray());
+            User newUser = new User(email, firstName, lastName, password);
             loginRepository.save(newUser);
             return "auth/login";
         } else {
