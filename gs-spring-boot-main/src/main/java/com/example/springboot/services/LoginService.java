@@ -64,9 +64,9 @@ public class LoginService {
             Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 32, 64);
             model.addAttribute("message", "You registered succesfully");
             model.addAttribute("email", email);
-            String hash = argon2.hash(2,15*1024,1, password.toCharArray());
-            User newUser = new User(email, firstName, lastName, hash);
-            // loginRepository.save(newUser);
+            // String hash = argon2.hash(2,15*1024,1, password.toCharArray());
+            User newUser = new User(email, firstName, lastName, password);
+            loginRepository.save(newUser);
             return "auth/login";
         } else {
             model.addAttribute("invalidCredentials", true);
