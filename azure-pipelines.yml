@@ -34,6 +34,18 @@ stages:
       displayName: 'Maven Package'
       inputs:
         mavenPomFile: 'gs-spring-boot-main/pom.xml'
+    
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'gs-spring-boot-main/pom.xml'
+        goals: 'test'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
 
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
@@ -44,6 +56,7 @@ stages:
 
     - upload: $(Build.ArtifactStagingDirectory)
       artifact: drop
+
 
 - stage: Deploy
   displayName: Deploy stage
