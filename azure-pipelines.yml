@@ -47,7 +47,7 @@ stages:
 
 
 - stage: Test
-  displayName: Test
+  displayName: Test stage
   dependsOn: Build
   condition: succeeded()
   jobs:
@@ -56,9 +56,9 @@ stages:
       pool: 
         vmImage: $(vmImageName)
       steps:
+          - script: mvn test -Dtest=HelloControllerIT
           - task: Maven@3
             inputs:
-              mavenPomFile: 'gs-spring-boot-main/pom.xml'
               goals: 'test'
               publishJUnitResults: true
               testResultsFiles: '**/surefire-reports/TEST-*.xml'
