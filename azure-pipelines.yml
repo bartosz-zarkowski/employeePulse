@@ -48,7 +48,8 @@ stages:
 
 - stage: Test
   displayName: Test
-  dependsOn: Build
+  dependsOn: Build stage
+  condition: succeeded()
   jobs:
     - job: Testing
       displayName: Testing
@@ -70,7 +71,7 @@ stages:
 
 - stage: Deploy
   displayName: Deploy stage
-  dependsOn: Build
+  dependsOn: Test
   condition: succeeded()
   jobs:
   - deployment: DeployLinuxWebApp
