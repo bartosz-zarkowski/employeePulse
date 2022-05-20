@@ -45,44 +45,9 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)
       artifact: drop
 
-- stage: Test
-  displayName: Test stage
+- stage: Dev
+  displayName: Dev stage
   dependsOn: Build
-  condition: succeeded()
-  jobs:
-    - job: Testing
-      displayName: Testing
-      pool: 
-        vmImage: $(vmImageName)
-      steps:
-          - task: CmdLine@2
-            inputs:
-              script: |
-                cd gs-spring-boot-main
-                mvn test -Dtest=HelloControllerIT
-
-          - task: Maven@3
-            inputs:
-              mavenPomFile: 'gs-spring-boot-main/pom.xml'
-              mavenOptions: '-Xmx3072m'
-              javaHomeOption: 'JDKVersion'
-              jdkVersionOption: '1.8'
-              jdkArchitectureOption: 'x64'
-              publishJUnitResults: true
-              testResultsFiles: |
-                **/surefire-reports/TEST-*.xml
-              goals: 'package'
-              codeCoverageToolOption: 'jaCoCo'
-          - task: PublishTestResults@2
-            displayName: Publish Test Results **/test-*.xml
-            inputs:
-              testResultsFiles: |
-                **/surefire-reports/TEST-*.xml
-              failTaskOnFailedTests: true
-
-- stage: Deploy
-  displayName: Deploy stage
-  dependsOn: Test
   condition: succeeded()
   jobs:
   - deployment: DeployLinuxWebApp
@@ -101,3 +66,59 @@ stages:
               appType: webAppLinux
               appName: $(webAppName)
               package: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
+
+- stage: 'Test'
+  displayName: 'Deploy to the test environment'
+  dependsOn: Dev
+  jobs:
+  - deployment: Deploy
+    pool:
+      vmImage: $(vmImageName)
+    environment: $(environmentName)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+          - task: AzureWebApp@1
+            displayName: 'Azure App Service Deploy: website'
+            inputs:
+              azureSubscription: $(azureSubscription)
+              appType: webAppLinux
+              appName: $(webAppName)
+              package: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
+
+- stage: 'Staging'
+  displayName: 'Deploy to the staging environment'
+  dependsOn: Test
+  jobs:
+  - deployment: Deploy
+    pool:
+      vmImage: $(vmImageName)
+    environment: $(environmentName)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+          - task: AzureWebApp@1
+            displayName: 'Azure App Service Deploy: website'
+            inputs:
+              azureSubscription: $(azureSubscription)
+              appType: webAppLinux
+              appName: $(webAppName)
+              package: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
+  - job: RunLoadTests
+    dependsOn: Deploy
+    displayName: 'Run load tests'
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - script: mvn test -Dtest=HelloControllerIT
+      displayName: 'Run Load tests'
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: JUnit
+        testResultsFiles: JUnit.xml
