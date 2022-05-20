@@ -56,17 +56,26 @@ stages:
       pool: 
         vmImage: $(vmImageName)
       steps:
-          - script: mvn test -Dtest=HelloControllerIT
+          - script: | cd gs-spring-boot-main
+          mvn test -Dtest=HelloControllerIT
           - task: Maven@3
             inputs:
-              goals: 'test'
-              publishJUnitResults: true
-              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+              mavenPomFile: 'gs-spring-boot-main/pom.xml'
+              mavenOptions: '-Xmx3072m'
               javaHomeOption: 'JDKVersion'
-              mavenVersionOption: 'Default'
-              mavenAuthenticateFeed: false
-              effectivePomSkip: false
-              sonarQubeRunAnalysis: false
+              jdkVersionOption: '1.8'
+              jdkArchitectureOption: 'x64'
+              publishJUnitResults: true
+              testResultsFiles: |
+                **/surefire-reports/TEST-*.xml
+              goals: 'package'
+              codeCoverageToolOption: 'jaCoCo'
+          - task: PublishTestResults@2
+            displayName: Publish Test Results **/test-*.xml
+            inputs:
+              testResultsFiles: |
+                **/surefire-reports/TEST-*.xml
+              failTaskOnFailedTests: true
 
 
 - stage: Deploy
