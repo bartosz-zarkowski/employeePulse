@@ -45,7 +45,6 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)
       artifact: drop
 
-
 - stage: Test
   displayName: Test stage
   dependsOn: Build
@@ -56,8 +55,6 @@ stages:
       pool: 
         vmImage: $(vmImageName)
       steps:
-          - script: | cd gs-spring-boot-main
-          mvn test -Dtest=HelloControllerIT
           - task: Maven@3
             inputs:
               mavenPomFile: 'gs-spring-boot-main/pom.xml'
