@@ -31,7 +31,6 @@
                         <button class="answer-btn" th:action="@{/vote?id=${id}?option=1}">
                             <!-- Tutaj pobrać obraz z bazy danych (mechanika do omówienia)-->
 
-                            <img src="css/IMAGES/smile.png" class="card-img-top survey-image" alt="">
                             <div class="card-body">
                                 <!-- Tutaj pobrać odpowiedź z bazy -->
                                 <p class="card-text" th:text="${answer1}"></p>
@@ -45,7 +44,6 @@
                     <div class="card answer">
                         <button class="answer-btn" th:action="@{/vote?id=${id}?option=2}">
                             <!-- Tutaj pobrać obraz z bazy danych (mechanika do omówienia)-->
-                            <img src="css/IMAGES/smile.png" class="card-img-top survey-image" alt="">
                             <div class="card-body">
                                 <!-- Tutaj pobrać odpowiedź z bazy -->
                                 <p class="card-text" th:text="${answer2}"></p>
@@ -59,7 +57,6 @@
                     <div class="card answer">
                         <button class="answer-btn">
                             <!-- Tutaj pobrać obraz z bazy danych (mechanika do omówienia)-->
-                            <img src="css/IMAGES/smile.png" class="card-img-top survey-image" alt="">
                                 <div class="card-body">
                                     <!-- Tutaj pobrać odpowiedź z bazy -->
                                     <p class="card-text" th:text="${answer3}"></p>
@@ -73,7 +70,6 @@
                     <div class="card answer">
                         <button class="answer-btn" th:href="@{/vote?id=${id}?option=4}">
                             <!-- Tutaj pobrać obraz z bazy danych (mechanika do omówienia)-->
-                            <img src="css/IMAGES/smile.png" class="card-img-top survey-image" alt="">
                             <div class="card-body">
                                 <!-- Tutaj pobrać odpowiedź z bazy -->
                                 <p class="card-text" th:text="${answer4}"></p>

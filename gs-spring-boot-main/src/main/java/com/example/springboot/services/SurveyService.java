@@ -114,6 +114,12 @@ public class SurveyService {
 
     private boolean checkIfValid(String startedAt, String expiredAt) {
 
+        startedAt = startedAt.replace(".", "-");
+        startedAt = startedAt + "T11:58";
+
+        System.out.println(startedAt);
+        System.out.println(expiredAt);
+
         char[] chars1 = startedAt.toCharArray();
         chars1[10] = ' ';
         String start1 = String.valueOf(chars1);
