@@ -56,9 +56,11 @@ stages:
         vmImage: $(vmImageName)
       steps:
           - task: CmdLine@2
+            displayName: "Run tests"
             inputs:
               script: |
                 cd gs-spring-boot-main
+                mvn test -Dtest=HelloControllerIT
           - task: Maven@3
             inputs:
               mavenPomFile: 'gs-spring-boot-main/pom.xml'
