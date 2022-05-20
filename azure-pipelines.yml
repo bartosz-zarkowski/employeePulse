@@ -73,12 +73,6 @@ stages:
                 **/surefire-reports/TEST-*.xml
               goals: 'package'
               codeCoverageToolOption: 'jaCoCo'
-          - task: PublishTestResults@2
-            displayName: Publish Test Results **/test-*.xml
-            inputs:
-              testResultsFiles: |
-                **/surefire-reports/TEST-*.xml
-              failTaskOnFailedTests: true
 
 - stage: Deploy
   displayName: Deploy stage
