@@ -11,5 +11,4 @@ com\example\springboot\model\LoginForm.class
 com\example\springboot\model\SurveyForm.class
 com\example\springboot\model\RegisterForm.class
 com\example\springboot\controllers\LoginController.class
-com\example\springboot\model\HashCreator.class
 com\example\springboot\repository\SurveyRepository.class
