@@ -9,9 +9,12 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
 
+@EnableJdbcHttpSession
 @SpringBootApplication
 public class Application {
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);

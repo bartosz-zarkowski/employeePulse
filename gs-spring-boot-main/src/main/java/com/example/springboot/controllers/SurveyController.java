@@ -3,10 +3,14 @@ package com.example.springboot.controllers;
 import com.example.springboot.model.*;
 import com.example.springboot.services.LoginService;
 import com.example.springboot.services.SurveyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class SurveyController {
@@ -18,8 +22,8 @@ public class SurveyController {
     }
 
     @RequestMapping(value = "/generate", method = RequestMethod.GET)
-    public String getGenerateSurveyPage(@RequestParam String email, Model model){
-        return surveyService.getPage(email, model);
+    public String getGenerateSurveyPage(HttpServletRequest request, @RequestParam String email, Model model){
+        return surveyService.getPage(request, email, model);
     }
 
     @RequestMapping(value = "/generate", method = RequestMethod.POST)
@@ -29,8 +33,8 @@ public class SurveyController {
     }
 
     @RequestMapping(value = "/link", method = RequestMethod.GET)
-    public String getLink(Model model){
-        return surveyService.getSurveyLink(model);
+    public String getLink(HttpServletRequest request, Model model){
+        return surveyService.getSurveyLink(request, model);
     }
 
     @RequestMapping(value = "/survey", method = RequestMethod.GET)
@@ -44,13 +48,13 @@ public class SurveyController {
     }
 
     @RequestMapping(value = "/display", method = RequestMethod.GET)
-    public String display(@ModelAttribute (name="filterForm") FilterForm filterForm, @RequestParam String email, Model model){
-        return surveyService.display(filterForm, email, model);
+    public String display(HttpServletRequest request, @ModelAttribute (name="filterForm") FilterForm filterForm, @RequestParam String email, Model model){
+        return surveyService.display(request, filterForm, email, model);
     }
 
     @RequestMapping(value = "/display", method = RequestMethod.POST)
-    public String display1(@ModelAttribute (name="filterForm") FilterForm filterForm, @RequestParam String email, Model model){
-        return surveyService.display(filterForm, email, model);
+    public String display1(HttpServletRequest request, @ModelAttribute (name="filterForm") FilterForm filterForm, @RequestParam String email, Model model){
+        return surveyService.display(request, filterForm, email, model);
     }
 
     @RequestMapping(value = "/filter", method = RequestMethod.POST)

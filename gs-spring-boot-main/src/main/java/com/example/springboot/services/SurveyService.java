@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.tags.EditorAwareTag;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -27,19 +28,21 @@ public class SurveyService {
         this.surveyRepository = surveyRepository;
     }
 
-    public String getPage(String email, Model model) {
+    public String getPage(HttpServletRequest request, String email, Model model) {
 
-        if ("key" == "key"){
-            User user = loginRepository.findByEmail(email);
-
-            String firstName = user.getFirstName();
-            String lastName = user.getLastName();
-
-            model.addAttribute("name", firstName + " " + lastName);
-            model.addAttribute("email", email);
-        } else {
+        @SuppressWarnings("unchecked")
+        List<String> messages = (List<String>) request.getSession().getAttribute("MY_SESSION_MESSAGES");
+        if (messages == null) {
             return "redirect:/";
         }
+
+        User user = loginRepository.findByEmail(email);
+
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+
+        model.addAttribute("name", firstName + " " + lastName);
+        model.addAttribute("email", email);
         return "app/generate_survey";
     }
 
@@ -56,7 +59,14 @@ public class SurveyService {
         return "redirect:/link";
     }
 
-    public String getSurveyLink(Model model){
+    public String getSurveyLink(HttpServletRequest request, Model model){
+
+        @SuppressWarnings("unchecked")
+        List<String> messages = (List<String>) request.getSession().getAttribute("MY_SESSION_MESSAGES");
+        if (messages == null) {
+            return "redirect:/";
+        }
+
         String email = (String) model.getAttribute("email");
         String title = (String) model.getAttribute("title");
         String question = (String) model.getAttribute("question");
@@ -156,10 +166,17 @@ public class SurveyService {
 
     public String dateToLocalDate(String date){
         date = date.substring(0, 10);
+        date = date.replace(".", "-");
         return date;
     }
 
-    public String display(FilterForm filterForm, String email, Model model) {
+    public String display(HttpServletRequest request, FilterForm filterForm, String email, Model model) {
+
+        @SuppressWarnings("unchecked")
+        List<String> messages = (List<String>) request.getSession().getAttribute("MY_SESSION_MESSAGES");
+        if (messages == null) {
+            return "redirect:/";
+        }
 
 
         User user = loginRepository.findByEmail(email);
@@ -172,16 +189,14 @@ public class SurveyService {
 
                 if (!Objects.equals(filterForm.getTitle(), "") & !Objects.equals(filterForm.getStartedAt(), "") & !Objects.equals(filterForm.getStoppedAt(), "")){
                     // wszystko
-                surveyList.removeIf(survey -> !survey.getTitle().toLowerCase().contains(filterForm.getTitle().toLowerCase()));
+                    surveyList.removeIf(survey -> !survey.getTitle().toLowerCase().contains(filterForm.getTitle().toLowerCase()));
 
-                LocalDate filterStart = LocalDate.parse(filterForm.getStartedAt());
-                LocalDate filterStop = LocalDate.parse(filterForm.getStoppedAt());
+                    LocalDate filterStart = LocalDate.parse(filterForm.getStartedAt());
+                    LocalDate filterStop = LocalDate.parse(filterForm.getStoppedAt());
 
-                surveyList.removeIf(survey -> LocalDate.parse(dateToLocalDate(survey.getStartedAt())).isBefore(filterStart));
-                surveyList.removeIf(survey -> LocalDate.parse(dateToLocalDate(survey.getExpiredAt())).isAfter(filterStop));
-                    System.out.println(filterForm.getTitle());
-                    System.out.println(filterForm.getStartedAt());
-                    System.out.println(filterForm.getStoppedAt());
+                    surveyList.removeIf(survey -> LocalDate.parse(dateToLocalDate(survey.getStartedAt())).isBefore(filterStart));
+                    surveyList.removeIf(survey -> LocalDate.parse(dateToLocalDate(survey.getExpiredAt())).isAfter(filterStop));
+
                 } else if (Objects.equals(filterForm.getTitle(), "") & !Objects.equals(filterForm.getStartedAt(), "") & !Objects.equals(filterForm.getStoppedAt(), "")){
                     // daty
 
@@ -213,17 +228,21 @@ public class SurveyService {
                     surveyList.removeIf(survey -> !survey.getTitle().toLowerCase().contains(filterForm.getTitle().toLowerCase()));
                 }
             } else {
-                System.out.println("XDDDDDDD");
+                System.out.println("4");
             }
 
 
             for (Survey survey : surveyList){
                 String date = survey.getStartedAt();
-                String year = date.substring(0, 4);
-                String month = date.substring(5, 7);
-                String day = date.substring(8, 10);
-                survey.setStartedAt(day + "." + month + "." + year + "r");
+//                String year = date.substring(0, 4);
+//                String month = date.substring(5, 7);
+//                String day = date.substring(8, 10);
+//                survey.setStartedAt(day + "." + month + "." + year + "r");
+                date = date.substring(0, 10);
+                date = date.replace("-", ".");
+                survey.setStartedAt(date);
             }
+
             System.out.println("xD " + email);
             Collections.reverse(surveyList);
             model.addAttribute("email", email);

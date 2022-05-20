@@ -12,10 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class LoginService {
@@ -26,7 +26,10 @@ public class LoginService {
         this.loginRepository = loginRepository;
     }
 
-    public String login(LoginForm loginForm, RedirectAttributes redirectAttrs) {
+    public String login(HttpSession session, LoginForm loginForm, RedirectAttributes redirectAttrs) {
+
+        List<String> messages = new ArrayList<>();
+        session.setAttribute("MY_SESSION_MESSAGES", messages);
 
         String email = loginForm.getEmail();
         String password = loginForm.getPassword();
@@ -84,5 +87,10 @@ public class LoginService {
             model.addAttribute("invalidCredentials", true);
             return "auth/register";
         }
+    }
+
+    public String logout(HttpServletRequest request, Model model) {
+        request.getSession().invalidate();
+        return "redirect:/";
     }
 }
