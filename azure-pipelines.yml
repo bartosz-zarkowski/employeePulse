@@ -48,7 +48,7 @@ stages:
 
 - stage: Test
   displayName: Test
-  dependsOn: Build stage
+  dependsOn: Build
   condition: succeeded()
   jobs:
     - job: Testing
