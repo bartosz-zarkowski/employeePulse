@@ -33,16 +33,23 @@
 
     <div class="container survey-container">
         <div class="row">
-            <div class="col-sm-9 col-md-9 col-lg-9 mx-auto copy">
+            <div class="col-sm-9 col-md-9 col-lg-9 mb-5 mx-auto copy">
                 <input type="text" class="form-control link-field" id="floating-text" type="text" value="https://www.youtube.com/watch?v=zrON6VI5kCQ">
             </div>
-            <div class="col-sm-3 col-md-3 col-lg-3 mx-auto copy">
+            <div class="col-sm-3 col-md-3 col-lg-3 mb-5 mx-auto copy">
                 <button class="btn btn-primary btn-copy" onclick="copyLink()">Kopiuj</button>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6 mx-auto">
+                <button class="btn btn-primary btn-login mb-3" id="return" type="submit">Powrót do generowania ankiet</button>
             </div>
         </div>
     </div>
 
     <script>
+        document.getElementById('return').addEventListener('click', (event) => {
+            window.location.href = "generate_survey.html";
+        });
+
         function copyLink() {
             /* Get the text field */
             var copyText = document.getElementById("floating-text");

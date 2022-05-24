@@ -72,6 +72,22 @@ body {
     background-color: #727272;
 }
 
+.answer-1:hover {
+    background-color: #32CD32;
+}
+
+.answer-2:hover {
+    background-color: #000000;
+}
+
+.answer-3:hover {
+    background-color: #000080;
+}
+
+.answer-4:hover {
+    background-color: #FF0000;
+}
+
 .survey-image {
     width: 150px;
     height: 150px;
