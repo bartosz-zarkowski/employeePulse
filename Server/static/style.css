@@ -58,7 +58,7 @@ body {
 
 /* responsiveness */
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 768px) {
     .navbar {
         height: auto;
     }
@@ -67,15 +67,15 @@ body {
         flex-flow: column;
     }
     .redirect {
-        order: 3;
-        margin-bottom: 1rem!important;
-    }
-    .title {
         order: 1;
         margin-bottom: 1rem!important;
     }
-    .user {
+    .title {
         order: 2;
+        margin-bottom: 1rem!important;
+    }
+    .user {
+        order: 3;
         margin-bottom: 1rem!important;
         justify-content: center;
     }
@@ -241,6 +241,93 @@ input[type=date] {
 }
 
 
+/* STYLES FOR EMOJI CHOICE */
+
+
+/* style for button */
+
+.custom-theme {
+    --background-color: blue;
+    --accent-color: green;
+    --hover-background-color: red;
+    --category-name-background-color: pink;
+    --scrollbar-color: rgba(255, 255, 255, 0.75);
+    --secondary-background-color: purple;
+    --text-color: white;
+    --category-name-text-color: white;
+    --search-background-color: pink;
+}
+
+.emoji-button {
+    font-size: 2.5rem;
+    background: transparent;
+    border: none;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin-left: 1rem!important;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI Emoji', 'Segoe UI Symbol', 'Segoe UI', 'Apple Color Emoji', 'Twemoji Mozilla', 'Noto Color Emoji', 'EmojiOne Color', 'Android Emoji';
+}
+
+.emoji-button.empty {
+    background: url('https://picmojs.com/storybook/static/media/smile.0bd7575a.svg') no-repeat;
+    background-position: center;
+    background-size: 40px;
+    border: 2px dashed #333333;
+    opacity: 0.25;
+    transition: opacity 250ms;
+}
+
+.emoji-button.empty:hover {
+    opacity: 0.5;
+}
+
+.emoji-button img {
+    width: 32px;
+    height: 32px;
+}
+
+.emoji-background {
+    background-color: #EEE;
+    border-color: #EEE;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px rgb(0 0 0 / 50%);
+}
+
+.event-area h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.event-area pre {
+    background: #eee;
+    padding: 0.5rem;
+}
+
+
+/* style for popup */
+
+.modal {
+    --bs-modal-color: none;
+    --bs-modal-bg: none;
+    --bs-modal-border-color: none;
+}
+
+.modal-content {
+    align-items: center;
+}
+
+
+/* ----------------------------- */
+
+
 /* display_surveys.html */
 
 .survey-container {
@@ -329,6 +416,23 @@ input[type=date] {
     justify-content: center;
     align-items: center;
     font-size: 16px;
+}
+
+.btn-delete-survey {
+    margin-top: 1rem!important;
+    height: 40px;
+    background-color: #ff0000;
+    border-color: #ff0000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.btn-delete-survey:hover {
+    background-color: #940a00;
+    border-color: #940a00;
 }
 
 .survey-link {
