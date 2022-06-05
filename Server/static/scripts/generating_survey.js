@@ -17,15 +17,19 @@ document.getElementById('defaultFill').addEventListener('click', (event) => {
 
     var answer1 = document.getElementById('answer1');
     answer1.value = "Bardzo dobrze";
+    document.getElementById('emoji-1').setAttribute('value', '😃');
 
     var answer2 = document.getElementById('answer2');
     answer2.value = "Zwyczajnie";
+    document.getElementById('emoji-2').setAttribute('value', '😐');
 
     var answer3 = document.getElementById('answer3');
     answer3.value = "Smutno mi";
+    document.getElementById('emoji-3').setAttribute('value', '😢');
 
     var answer4 = document.getElementById('answer4');
     answer4.value = "Jestem zły";
+    document.getElementById('emoji-4').setAttribute('value', '🤬');
 
     const defaultEmojis = ['😃', '😐', '😢', '🤬'];
     const emojiButtonsArray = document.getElementsByClassName("emoji-button");
