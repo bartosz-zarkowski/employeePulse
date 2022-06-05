@@ -55,7 +55,7 @@
                             </div>
                             <div class="form-floating mb-3">
                                 <!-- Popup emoji picker -->
-                                <button type="button" id="emoji-button" class="emoji-button empty" data-bs-toggle="modal" data-bs-target="#reg-modal"></button>
+                                <button type="button" id="emoji-button-1" class="emoji-button empty" data-bs-toggle="modal" data-bs-target="#reg-modal"></button>
                                 <input type="hidden" id="emoji-1" value="">
                             </div>
                         </div>
@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-floating mb-3">
                                 <!-- Popup emoji picker -->
-                                <button type="button" id="emoji-button" class="emoji-button empty" data-bs-toggle="modal" data-bs-target="#reg-modal"></button>
+                                <button type="button" id="emoji-button-2" class="emoji-button empty" data-bs-toggle="modal" data-bs-target="#reg-modal"></button>
                                 <input type="hidden" id="emoji-2" value="">
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                             </div>
                             <div class="form-floating mb-3">
                                 <!-- Popup emoji picker -->
-                                <button type="button" id="emoji-button" class="emoji-button empty" data-bs-toggle="modal" data-bs-target="#reg-modal"></button>
+                                <button type="button" id="emoji-button-3" class="emoji-button empty" data-bs-toggle="modal" data-bs-target="#reg-modal"></button>
                                 <input type="hidden" id="emoji-3" value="">
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                             </div>
                             <div class="form-floating mb-3">
                                 <!-- Popup emoji picker -->
-                                <button type="button" id="emoji-button" class="emoji-button empty" data-bs-toggle="modal" data-bs-target="#reg-modal"></button>
+                                <button type="button" id="emoji-button-4" class="emoji-button empty" data-bs-toggle="modal" data-bs-target="#reg-modal"></button>
                                 <input type="hidden" id="emoji-4" value="">
                             </div>
                         </div>
@@ -122,13 +122,13 @@
     </div>
 
     <!-- Emoji picker -->
-
-    <div class="modal fade" id="reg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="reg-modal" tabindex="-1" role="dialog" aria-labelledby="modal-title">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
                     <p>
                         <emoji-picker></emoji-picker>
+                        <button type="button" class="btn btn-primary mt-3" id="closeModalBtn" data-bs-dismiss="modal">Zamknij</button>
                     </p>
                 </div>
             </div>

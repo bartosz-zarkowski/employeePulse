@@ -55,40 +55,26 @@ window.addEventListener('load', (event) => {
 
 // POPUP emoji picker
 const emojiButtonsArray = document.getElementsByClassName("emoji-button");
-const popupLocation = document.getElementById("popupLocation");
 const modal = document.getElementById("reg-modal");
 const backdrop = document.getElementsByClassName("modal-backdrop");
 
-var emojiCounter = 0;
 for (let emojiButton of emojiButtonsArray) {
-
     emojiButton.addEventListener("click", event => {
-        // console.log("Button clicked");
-        // console.log("stare emoji -> ", event.target);
+        let id = event.target.id;
+        emojiID = 'emoji-' + id[id.length - 1];
+
 
         const emojiPicker = document.querySelector('emoji-picker');
-        emojiID = 'emoji-' + (emojiCounter += 1);
-        console.log(emojiID);
 
         const setEmoji = e => {
             console.log("zmiana emoji na -> ", event.target);
             event.target.innerHTML = e.detail.unicode;
-            emojiPicker.removeEventListener('emoji-click', setEmoji);
             emojiButton.classList.remove('empty');
             emojiButton.classList.add('emoji-background');
-            modal.classList.remove('show');
-            modal.style.removeProperty('display');
-            document.body.removeAttribute("style");
-            document.body.removeAttribute("class");
-            modal.removeAttribute("aria-modal");
-            modal.removeAttribute("role");
-            modal.setAttribute('style', 'display: none;');
-            modal.setAttribute('aria-hidden', 'true');
-            document.body.removeChild(document.body.lastChild);
+            document.getElementById("closeModalBtn").click();
             document.getElementById(emojiID).setAttribute('value', e.detail.unicode);
-            console.log(e.detail.unicode);
 
-            // console.log(e.detail.unicode);
+            emojiPicker.removeEventListener('emoji-click', setEmoji);
         }
 
         emojiPicker.addEventListener('emoji-click', setEmoji);
