@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.tags.EditorAwareTag;
+import org.thymeleaf.context.WebContext;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.*;
@@ -54,6 +55,10 @@ public class SurveyService {
         redirectAttrs.addFlashAttribute("answer2", surveyForm.getAnswer2());
         redirectAttrs.addFlashAttribute("answer3", surveyForm.getAnswer3());
         redirectAttrs.addFlashAttribute("answer4", surveyForm.getAnswer4());
+        redirectAttrs.addFlashAttribute("emoji1", "emoji1");
+        redirectAttrs.addFlashAttribute("emoji2", surveyForm.getEmoji2());
+        redirectAttrs.addFlashAttribute("emoji3", surveyForm.getEmoji3());
+        redirectAttrs.addFlashAttribute("emoji4", surveyForm.getEmoji4());
         redirectAttrs.addFlashAttribute("startedAt", surveyForm.getStartedAt());
         redirectAttrs.addFlashAttribute("expiresAt", surveyForm.getExpiredAt());
         return "redirect:/link";
@@ -74,6 +79,10 @@ public class SurveyService {
         String answer2 = (String) model.getAttribute("answer2");
         String answer3 = (String) model.getAttribute("answer3");
         String answer4 = (String) model.getAttribute("answer4");
+        String emoji1 = (String) model.getAttribute("emoji1");
+        String emoji2 = (String) model.getAttribute("emoji2");
+        String emoji3 = (String) model.getAttribute("emoji3");
+        String emoji4 = (String) model.getAttribute("emoji4");
         String startedAt = (String) model.getAttribute("startedAt");
         String expiresAt = (String) model.getAttribute("expiresAt");
 
@@ -81,14 +90,15 @@ public class SurveyService {
 
         model.addAttribute("name", user.getFirstName() + " " + user.getLastName());
 
-        Survey survey = new Survey(title, question, answer1, answer2, answer3, answer4, startedAt, expiresAt, user);
+        Survey survey = new Survey(title, question, answer1, answer2, answer3, answer4, emoji1,  emoji2, emoji3, emoji4, startedAt, expiresAt, user);
         survey.setLink("123");
         surveyRepository.save(survey);
 
         Survey changeLink = surveyRepository.findById(survey.getId()).orElseThrow(
                 () -> new IllegalStateException("x"));
 
-        changeLink.setLink("https://employee-pulse.azurewebsites.net/survey?link=" + changeLink.getId());
+        // changeLink.setLink("https://employee-pulse.azurewebsites.net/survey?link=" + changeLink.getId());
+        changeLink.setLink("https://localhost:8080/survey?link=" + changeLink.getId());
         surveyRepository.save(changeLink);
 
         model.addAttribute("link", survey.getLink());
@@ -97,14 +107,23 @@ public class SurveyService {
     }
 
     public String getSurvey(String id, Model model) {
-        String link = "https://employee-pulse.azurewebsites.net/survey?link=" + id;
+
+        // String link = "https://employee-pulse.azurewebsites.net/survey?link=" + id;
+        String link = "https://localhost:8080/survey?link=" + id;
         Survey survey = surveyRepository.findById(Long.valueOf(id)).orElseThrow(() -> new IllegalStateException("x"));
         boolean valid = checkIfValid(survey.getStartedAt(), survey.getExpiredAt());
         if (!valid){
-            return "redirect:/";
+            return "app:/unavailable";
         }
         model.addAttribute("question", survey.getQuestion());
         model.addAttribute("answer1", survey.getAnswer1());
+        model.addAttribute("answer2", survey.getAnswer2());
+        model.addAttribute("answer3", survey.getAnswer3());
+        model.addAttribute("answer4", survey.getAnswer4());
+        model.addAttribute("emoji1", survey.getEmoji1());
+        model.addAttribute("emoji2", survey.getEmoji2());
+        model.addAttribute("emoji3", survey.getEmoji3());
+        model.addAttribute("emoji4", survey.getEmoji4());
         model.addAttribute("answer2", survey.getAnswer2());
         model.addAttribute("answer3", survey.getAnswer3());
         model.addAttribute("answer4", survey.getAnswer4());
@@ -167,7 +186,7 @@ public class SurveyService {
 
         surveyRepository.save(survey);
 
-        return "auth/login";
+        return "redirect:/thanks";
     }
 
     public String dateToLocalDate(String date){
@@ -265,5 +284,24 @@ public class SurveyService {
         System.out.println(filterForm.getStartedAt());
         System.out.println(filterForm.getStoppedAt());
         return "redirect:/display?email={email}";
+    }
+
+    public String delete(HttpServletRequest request, String email, String id, Model model) {
+
+        @SuppressWarnings("unchecked")
+        List<String> messages = (List<String>) request.getSession().getAttribute("MY_SESSION_MESSAGES");
+        if (messages == null) {
+            return "redirect:/";
+        }
+
+        Survey survey = surveyRepository.findById(Long.valueOf(id)).orElseThrow(() -> new IllegalStateException("x"));
+        surveyRepository.delete(survey);
+
+        return "redirect:/display?email=" + email;
+
+    }
+
+    public String thanks(Model model) {
+        return "app/thanks";
     }
 }

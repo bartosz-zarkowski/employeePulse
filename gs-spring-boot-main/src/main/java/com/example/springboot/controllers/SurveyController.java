@@ -62,4 +62,14 @@ public class SurveyController {
         return surveyService.filter(filterForm, email, redirectAttributes);
     }
 
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String delete(HttpServletRequest request, @RequestParam String email, @RequestParam String id, Model model){
+        return surveyService.delete(request, email, id, model);
+    }
+
+    @RequestMapping(value = "/thanks", method = RequestMethod.GET)
+    public String thanks(Model model){
+        return surveyService.thanks(model);
+    }
+
 }

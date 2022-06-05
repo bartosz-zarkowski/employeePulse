@@ -23,6 +23,10 @@ public class Survey {
     private String answer2;
     private String answer3;
     private String answer4;
+    private String emoji1;
+    private String emoji2;
+    private String emoji3;
+    private String emoji4;
 
     private int answerCounter1;
     private int answerCounter2;
@@ -37,13 +41,17 @@ public class Survey {
     private User user;
 
     public Survey(String title, String question, String answer1, String answer2, String answer3,
-                  String answer4, String startedAt, String expiredAt, User user) {
+                  String answer4, String emoji1, String emoji2, String emoji3, String emoji4, String startedAt, String expiredAt, User user) {
         this.title = title;
         this.question = question;
         this.answer1 = answer1;
         this.answer2 = answer2;
         this.answer3 = answer3;
         this.answer4 = answer4;
+        this.emoji1 = emoji1;
+        this.emoji2 = emoji2;
+        this.emoji3 = emoji3;
+        this.emoji4 = emoji4;
         this.answerCounter1 = 0;
         this.answerCounter2 = 0;
         this.answerCounter3 = 0;

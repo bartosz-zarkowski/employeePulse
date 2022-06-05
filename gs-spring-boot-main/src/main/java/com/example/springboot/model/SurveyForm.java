@@ -14,12 +14,48 @@ public class SurveyForm {
     private String answer2;
     private String answer3;
     private String answer4;
+    private String emoji1;
+    private String emoji2;
+    private String emoji3;
+    private String emoji4;
     private String startedAt;
     private String expiredAt;
     private String email;
 
     public SurveyForm(){
         super();
+    }
+
+    public String getEmoji1() {
+        return emoji1;
+    }
+
+    public void setEmoji1(String emoji1) {
+        this.emoji1 = emoji1;
+    }
+
+    public String getEmoji2() {
+        return emoji2;
+    }
+
+    public void setEmoji2(String emoji2) {
+        this.emoji2 = emoji2;
+    }
+
+    public String getEmoji3() {
+        return emoji3;
+    }
+
+    public void setEmoji3(String emoji3) {
+        this.emoji3 = emoji3;
+    }
+
+    public String getEmoji4() {
+        return emoji4;
+    }
+
+    public void setEmoji4(String emoji4) {
+        this.emoji4 = emoji4;
     }
 
     public String getTitle() {

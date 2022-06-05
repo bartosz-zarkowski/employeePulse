@@ -15,77 +15,85 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="survey col-sm-12 col-md-12 col-lg-12 col-xl-12">
+<div class="container">
+    <div class="survey col-sm-12 col-md-12 col-lg-12 col-xl-10">
 
-            <div class="question row">
-                <div class="col-12" th:text="${question}">
-                    <!-- Tutaj pobrać pytanie z bazy -->
-                </div>
+        <div class="question row">
+            <div class="col-12" th:text="${question}">
+                <!-- Tutaj pobrać pytanie z bazy -->
             </div>
-            <div class="answers row row-cols-1 row-cols-md-2">
-                <a th:href="@{|vote?id=${id}&option=3|}" class="answer-btn">
+        </div>
+        <div class="answers row row-cols-1 row-cols-md-2">
+            <a th:href="@{|vote?id=${id}&option=1|}" class="answer-btn">
                 <div class="col mb-4 d-flex align-items-stretch">
 
                     <div class="card answer">
                         <button class="answer-btn" th:action="@{/vote?id=${id}?option=1}">
                             <!-- Tutaj pobrać obraz z bazy danych (mechanika do omówienia)-->
 
-                            <img src="css/IMAGES/smile.png" class="card-img-top survey-image" alt="">
-                            <div class="card-body">
-                                <!-- Tutaj pobrać odpowiedź z bazy -->
-                                <p class="card-text" th:text="${answer1}"></p>
+                            <div class="card-header card-header-answer-1" th:text="${emoji1}">
+                                😃
                             </div>
+                            <div class="card-body card-body-answer-1">
+                                <!-- Tutaj pobrać odpowiedź z bazy -->
+                                <p class="card-text " th:text="${answer1}">Bardzo dobrze</p>
+                            </div>
+
                         </button>
                     </div>
                 </div>
-                </a>
-                <a th:href="@{|vote?id=${id}&option=2|}" class="answer-btn">
+            </a>
+            <a th:href="@{|vote?id=${id}&option=2|}" class="answer-btn">
                 <div class="col mb-4 d-flex align-items-stretch">
                     <div class="card answer">
                         <button class="answer-btn" th:action="@{/vote?id=${id}?option=2}">
                             <!-- Tutaj pobrać obraz z bazy danych (mechanika do omówienia)-->
-                            <img src="css/IMAGES/smile.png" class="card-img-top survey-image" alt="">
-                            <div class="card-body">
+                            <div class="card-header card-header-answer-2" th:text="${emoji2}">
+                                😐
+                            </div>
+                            <div class="card-body card-body-answer-2">
                                 <!-- Tutaj pobrać odpowiedź z bazy -->
-                                <p class="card-text" th:text="${answer2}"></p>
+                                <p class="card-text " th:text="${answer2}">Bardzo dobrze</p>
                             </div>
                         </button>
                     </div>
                 </div>
-                </a>
-                <a th:href="@{|vote?id=${id}&option=3|}" class="answer-btn">
+            </a>
+            <a th:href="@{|vote?id=${id}&option=3|}" class="answer-btn">
                 <div class="col mb-4 d-flex align-items-stretch">
                     <div class="card answer">
                         <button class="answer-btn">
-                            <!-- Tutaj pobrać obraz z bazy danych (mechanika do omówienia)-->
-                            <img src="css/IMAGES/smile.png" class="card-img-top survey-image" alt="">
-                                <div class="card-body">
-                                    <!-- Tutaj pobrać odpowiedź z bazy -->
-                                    <p class="card-text" th:text="${answer3}"></p>
-                                </div>
+                            <div class="card-header card-header-answer-3" th:text="${emoji3}">
+                                😢
+                            </div>
+                            <div class="card-body card-body-answer-3">
+                                <!-- Tutaj pobrać odpowiedź z bazy -->
+                                <p class="card-text " th:text="${answer3}">Bardzo dobrze</p>
+                            </div>
                         </button>
                     </div>
                 </div>
-                </a>
-                <a th:href="@{|vote?id=${id}&option=4|}" class="answer-btn">
+            </a>
+            <a th:href="@{|vote?id=${id}&option=4|}" class="answer-btn">
                 <div class="col mb-4 d-flex align-items-stretch">
                     <div class="card answer">
                         <button class="answer-btn" th:href="@{/vote?id=${id}?option=4}">
                             <!-- Tutaj pobrać obraz z bazy danych (mechanika do omówienia)-->
-                            <img src="css/IMAGES/smile.png" class="card-img-top survey-image" alt="">
-                            <div class="card-body">
+                            <div class="card-header card-header-answer-4" th:text="${emoji4}">
+                                🤬
+                            </div>
+                            <div class="card-body card-body-answer-4">
                                 <!-- Tutaj pobrać odpowiedź z bazy -->
                                 <p class="card-text" th:text="${answer4}"></p>
                             </div>
                         </button>
                     </div>
                 </div>
-                </a>
-            </div>
+            </a>
         </div>
-
     </div>
+
+</div>
 </body>
 
 </html>
