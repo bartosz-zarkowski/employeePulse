@@ -1,0 +1,172 @@
+body {
+    background-color: white;
+    font-family: 'Roboto', sans-serif;
+    color: #727272;
+    display: flex;
+    font-size: 18px;
+    align-content: flex-end;
+    flex-direction: column;
+}
+
+.navbar {
+    width: 100%;
+    height: 110px;
+    background-color: #C7BEBE;
+    padding: 10px;
+    padding-left: 30px;
+}
+
+.topbar {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+.logout{
+background-color: #C7BEBE;
+border: 0
+}
+.redirect {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    font-size: 48px;
+}
+
+.user {
+    text-align: center;
+    display: flex;
+    font-size: 24px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.user-name {
+    margin-right: 20px;
+}
+
+.container {
+    height: 85vh;
+}
+
+.row {
+    width: 100%;
+    height: 100%;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    align-content: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+input[type=text] {
+    background-color: #EEE;
+    border-color: #EEE;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+    width: 100%;
+}
+
+input[type=datetime-local] {
+    background-color: #EEE;
+    border-color: #EEE;
+    color: #727272;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+    width: 280px;
+}
+
+.form {
+    width: 100%;
+}
+
+.form-floating>label {
+    text-align: center;
+    color: #727272;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+}
+
+.form-floating>.form-control,
+.form-floating>.form-select {
+    color: #727272;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    text-align: center;
+}
+
+.form-control {
+    margin: 0;
+}
+
+.form-control-left {
+    width: 100%;
+    margin-right: 20px;
+}
+
+.form-control-right {
+    width: 100%;
+    margin-left: 20px;
+}
+
+.col-6 {
+    padding: 0;
+    text-align: center;
+}
+
+.dates {
+    --bs-gutter-x: 0rem;
+}
+
+.btn {
+    width: 100%;
+    height: 60px;
+    background-color: #56BAED;
+    border-color: #56BAED;
+    color: #FFFFFF;
+    font-size: 22px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+.btn:hover {
+    background-color: #3E8DB5;
+    border-color: #3E8DB5;
+}
+
+.label {
+    width: 100%;
+}
+
+.input-group {
+    margin-top: 30px;
+    position: relative;
+}
+
+
+/*survey_link.html*/
+
+.copy {
+    margin: 0px;
+    display: flex;
+    align-content: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.link-field {
+    height: 60px;
+}
+
+btn-copy {
+    width: auto;
+}

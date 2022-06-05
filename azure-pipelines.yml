@@ -6,14 +6,92 @@
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
+variables:
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+  # Azure Resource Manager connection created during pipeline creation
+  azureSubscription: '2d5a0f6e-46b5-4ef4-8152-c1d177dd1c4b'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  # Web app name
+  webAppName: 'employee-pulse'
+
+  # Environment name
+  environmentName: 'employee-pulse'
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:
+  - job: MavenPackageAndPublishArtifacts
+    displayName: Maven Package and Publish Artifacts
+    pool:
+      vmImage: $(vmImageName)
+
+    steps:
+    - task: Maven@3
+      displayName: 'Maven Package'
+      inputs:
+        mavenPomFile: 'gs-spring-boot-main/pom.xml'
+
+    - task: CopyFiles@2
+      displayName: 'Copy Files to artifact staging directory'
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: '**/target/*.?(war|jar)'
+        TargetFolder: $(Build.ArtifactStagingDirectory)
+
+    - upload: $(Build.ArtifactStagingDirectory)
+      artifact: drop
+
+- stage: Test
+  displayName: Test stage
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+    - job: Testing
+      displayName: Testing
+      pool: 
+        vmImage: $(vmImageName)
+      steps:
+          - task: CmdLine@2
+            displayName: "Run tests"
+            inputs:
+              script: |
+                cd gs-spring-boot-main
+                mvn test -Dtest=HelloControllerIT
+          - task: Maven@3
+            inputs:
+              mavenPomFile: 'gs-spring-boot-main/pom.xml'
+              mavenOptions: '-Xmx3072m'
+              javaHomeOption: 'JDKVersion'
+              jdkVersionOption: '1.8'
+              jdkArchitectureOption: 'x64'
+              publishJUnitResults: true
+              testResultsFiles: |
+                **/surefire-reports/TEST-*.xml
+              goals: 'package'
+              codeCoverageToolOption: 'jaCoCo'
+
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: Test
+  condition: succeeded()
+  jobs:
+  - deployment: DeployLinuxWebApp
+    displayName: Deploy Linux Web App
+    environment: $(environmentName)
+    pool:
+      vmImage: $(vmImageName)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureWebApp@1
+            displayName: 'Azure Web App Deploy: employee-pulse'
+            inputs:
+              azureSubscription: $(azureSubscription)
+              appType: webAppLinux
+              appName: $(webAppName)
+              package: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
