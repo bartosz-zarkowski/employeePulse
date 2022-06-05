@@ -55,14 +55,16 @@ const popupLocation = document.getElementById("popupLocation");
 const modal = document.getElementById("reg-modal");
 const backdrop = document.getElementsByClassName("modal-backdrop");
 
-
+var emojiCounter = 0;
 for (let emojiButton of emojiButtonsArray) {
 
     emojiButton.addEventListener("click", event => {
-        console.log("Button clicked");
-        console.log("stare emoji -> ", event.target);
+        // console.log("Button clicked");
+        // console.log("stare emoji -> ", event.target);
 
         const emojiPicker = document.querySelector('emoji-picker');
+        emojiID = 'emoji-' + (emojiCounter += 1);
+        console.log(emojiID);
 
         const setEmoji = e => {
             console.log("zmiana emoji na -> ", event.target);
@@ -79,8 +81,10 @@ for (let emojiButton of emojiButtonsArray) {
             modal.setAttribute('style', 'display: none;');
             modal.setAttribute('aria-hidden', 'true');
             document.body.removeChild(document.body.lastChild);
-
+            document.getElementById(emojiID).setAttribute('value', e.detail.unicode);
             console.log(e.detail.unicode);
+
+            // console.log(e.detail.unicode);
         }
 
         emojiPicker.addEventListener('emoji-click', setEmoji);

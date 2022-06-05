@@ -12,6 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../static/IMAGES/favicon.png" />
+
 </head>
 
 <body>
@@ -48,58 +50,49 @@
 
                         <div class="col-sm-12 col-md-12 col-lg-12 answer-edit">
                             <div class="form-floating mb-3 answer-input">
-                                <input type="text" class="form-control" id="answer1" placeholder="Odpowiedź 1" required="required">
+                                <input type="text" class="form-control" id="answer1" placeholder="Odpowiedź 1">
                                 <label for="floatingText">Odpowiedź 1</label>
                             </div>
                             <div class="form-floating mb-3">
-
                                 <!-- Popup emoji picker -->
                                 <button type="button" id="emoji-button" class="emoji-button empty" data-bs-toggle="modal" data-bs-target="#reg-modal"></button>
-                                <div class="modal fade" id="reg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <p>
-                                                    <emoji-picker></emoji-picker>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                <input type="hidden" id="emoji-1" value="">
                             </div>
                         </div>
 
                         <div class="col-sm-12 col-md-12 col-lg-12 answer-edit">
                             <div class="form-floating mb-3 answer-input">
-                                <input type="text" class="form-control" id="answer2" placeholder="Odpowiedź 2" required="required">
+                                <input type="text" class="form-control" id="answer2" placeholder="Odpowiedź 2">
                                 <label for="floatingText">Odpowiedź 2</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <!-- Popup emoji picker -->
                                 <button type="button" id="emoji-button" class="emoji-button empty" data-bs-toggle="modal" data-bs-target="#reg-modal"></button>
+                                <input type="hidden" id="emoji-2" value="">
                             </div>
                         </div>
 
                         <div class="col-sm-12 col-md-12 col-lg-12 answer-edit">
                             <div class="form-floating mb-3 answer-input">
-                                <input type="text" class="form-control" id="answer3" placeholder="Odpowiedź 3" required="required">
+                                <input type="text" class="form-control" id="answer3" placeholder="Odpowiedź 3">
                                 <label for="floatingText">Odpowiedź 3</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <!-- Popup emoji picker -->
                                 <button type="button" id="emoji-button" class="emoji-button empty" data-bs-toggle="modal" data-bs-target="#reg-modal"></button>
+                                <input type="hidden" id="emoji-3" value="">
                             </div>
                         </div>
 
                         <div class="col-sm-12 col-md-12 col-lg-12 answer-edit">
                             <div class="form-floating mb-3 answer-input">
-                                <input type="text" class="form-control" id="answer4" placeholder="Odpowiedź 4" required="required">
+                                <input type="text" class="form-control" id="answer4" placeholder="Odpowiedź 4">
                                 <label for="floatingText">Odpowiedź 4</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <!-- Popup emoji picker -->
                                 <button type="button" id="emoji-button" class="emoji-button empty" data-bs-toggle="modal" data-bs-target="#reg-modal"></button>
+                                <input type="hidden" id="emoji-4" value="">
                             </div>
                         </div>
 
@@ -129,6 +122,19 @@
     </div>
 
     <!-- Emoji picker -->
+
+    <div class="modal fade" id="reg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>
+                        <emoji-picker></emoji-picker>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="https://unpkg.com/emoji-picker-element@1"></script>
     <script src="../../static/scripts/generating_survey.js"></script>
 
