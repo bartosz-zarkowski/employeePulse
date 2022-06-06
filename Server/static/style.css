@@ -101,6 +101,11 @@ body {
     align-items: center;
 }
 
+.logo {
+    width: 50%;
+    margin-top: 140px;
+}
+
 input[type=text] {
     background-color: #EEE;
     border-color: #EEE;
@@ -231,6 +236,11 @@ input[type=date] {
     width: auto;
 }
 
+.row-logo {
+    display: flex;
+    justify-content: center;
+}
+
 
 /* generate_survey */
 
@@ -238,6 +248,10 @@ input[type=date] {
     margin-top: 40px;
     height: auto;
     width: 100%;
+}
+
+.link-row {
+    text-align: center;
 }
 
 
@@ -410,6 +424,15 @@ emoji-picker {
     font-weight: bold;
 }
 
+.link-logo {
+    margin-bottom: 40px;
+}
+
+.link-row {
+    display: flex;
+    justify-content: center;
+}
+
 .link-field-survey {
     margin-top: 1rem!important;
     height: 40px;
@@ -528,6 +551,17 @@ emoji-picker {
     }
     .form-control-end {
         margin-bottom: 1rem!important;
+    }
+    .logo {
+        width: 50%;
+        margin-top: 250px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .logo {
+        width: 80%;
+        margin-top: 270px;
     }
 }
 

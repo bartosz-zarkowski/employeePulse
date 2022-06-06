@@ -42,9 +42,20 @@ body {
 
 /* Survey question */
 
+.logo {
+    width: 60%;
+}
+
+@media only screen and (max-width: 768px) {
+    .logo {
+        width: 100%;
+    }
+}
+
 .question {
     padding: 40px;
-    font-size: 24px;
+    font-size: 55px;
+    color: #727272;
 }
 
 
