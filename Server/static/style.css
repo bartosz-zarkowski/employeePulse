@@ -55,6 +55,14 @@ body {
     margin-right: 20px;
 }
 
+.logout-icon {
+    color: #727272;
+}
+
+.logout-icon:hover {
+    color: black;
+}
+
 
 /* responsiveness */
 
