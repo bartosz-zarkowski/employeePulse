@@ -2,10 +2,12 @@
         var linkButtons = document.getElementsByClassName("btn-copy-survey");
 
         for (let button of linkButtons) {
-            id = button.id.split('-')[button.id.split('-').length - 1];
-            inputID = 'link-input-' + id;
-            input = document.getElementById(inputID);
             button.addEventListener("click", event => {
+
+                /* get input id */
+                id = button.id.split('-')[button.id.split('-').length - 1];
+                inputID = 'link-input-' + id;
+                input = document.getElementById(inputID);
                 /* Select the text field */
 
                 input.select();
