@@ -386,8 +386,13 @@ emoji-picker {
     text-align: left;
 }
 
+.survey-header {
+    width: 100%;
+}
+
 .survey-date {
-    text-align: right;
+    display: flex;
+    align-items: center;
 }
 
 .accordion-button:after {
@@ -540,6 +545,9 @@ emoji-picker {
     .form-floating-title {
         margin-bottom: 1rem!important;
     }
+    .btn-copy-survey {
+        margin-right: 10px;
+    }
 }
 
 @media only screen and (max-width: 768px) {
@@ -561,18 +569,22 @@ emoji-picker {
         margin-bottom: 1rem!important;
     }
     .logo {
-        width: 50%;
-        margin-top: 250px;
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    .logo {
         width: 80%;
         margin-top: 270px;
     }
+    .btn-copy-survey {
+        margin-right: 50px;
+    }
 }
 
+@media only screen and (max-width: 540px) {
+    .btn-copy-survey {
+        margin-right: 55px;
+    }
+}
+
+
+}
 @media only screen and (min-width: 768px) {
     .form-control-end-gen {
         margin-bottom: 1rem!important;
