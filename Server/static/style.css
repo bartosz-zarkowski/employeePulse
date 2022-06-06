@@ -325,6 +325,15 @@ input[type=date] {
 }
 
 
+/* style for picker */
+
+emoji-picker {
+    --background: #EEE;
+    --border-color: #EEE;
+    ;
+}
+
+
 /* ----------------------------- */
 
 

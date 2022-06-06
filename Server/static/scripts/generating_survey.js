@@ -52,7 +52,6 @@ window.addEventListener('load', (event) => {
     document.getElementById('endTime').value = future.toISOString().slice(0, 16);
 });
 
-
 // POPUP emoji picker
 const emojiButtonsArray = document.getElementsByClassName("emoji-button");
 const modal = document.getElementById("reg-modal");
@@ -62,7 +61,6 @@ for (let emojiButton of emojiButtonsArray) {
     emojiButton.addEventListener("click", event => {
         let id = event.target.id;
         emojiID = 'emoji-' + id[id.length - 1];
-
 
         const emojiPicker = document.querySelector('emoji-picker');
 

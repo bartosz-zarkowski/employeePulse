@@ -111,10 +111,12 @@
                                         <button class="btn btn-danger btn-copy btn-delete-survey">Usuń ankietę</button>
                                     </div>
                                     <div class="col-sm-7 col-md-7 col-lg-7 mx-auto copy">
-                                        <input type="text" class="form-control link-field link-field-survey" readonly="readonly" id="floating-text" type="text" value="https://www.youtube.com/watch?v=zrON6VI5kCQ" style="box-shadow: none;color: #727272;font-size: 18px;">
+                                        <!-- id inputa podstawić z id ankiety -->
+                                        <input type="text" class="form-control link-field link-field-survey" readonly="readonly" id="link-input-id" type="text" value="https://www.youtube.com/watch?v=zrON6VI5kCQ" style="box-shadow: none;color: #727272;font-size: 18px;">
                                     </div>
                                     <div class="col-sm-2 col-md-2 col-lg-2 mx-auto copy">
-                                        <button class="btn btn-primary btn-copy btn-copy-survey" onclick="copyLink()">Kopiuj</button>
+                                        <!-- id buttonu podstawić z id ankiety -->
+                                        <button class="btn btn-primary btn-copy btn-copy-survey" id="link-button-id">Kopiuj</button>
                                     </div>
                                 </div>
 
@@ -126,22 +128,7 @@
         </div>
     </div>
 
-    <script>
-        function copyLink() {
-            /* Get the text field */
-            var copyText = document.getElementById("floating-text");
-
-            /* Select the text field */
-            copyText.select();
-            copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-            /* Copy the text inside the text field */
-            navigator.clipboard.writeText(copyText.value);
-
-            /* Alert the copied text */
-            alert("Copied the text: " + copyText.value);
-        }
-    </script>
+    <script src="../../static/scripts/display_surveys.js"></script>
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js " integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p " crossorigin="anonymous "></script>
